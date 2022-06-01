@@ -19,13 +19,17 @@ class Scoreboard(Turtle):
         with open('data.txt') as file:
             data = file.read()
             self.high_score = int(data)
-        self.write(arg=f"SCORE: {self.current_score}    HIGH SCORE: {self.high_score}", move=False, align=ALIGNMENT, font=FONT)
-        print(self.high_score)
+        self.update_score()
 
     # updates score if snake has snacked
     def update_score(self):
         self.clear()
-        self.write(arg=f"SCORE: {self.current_score}    HIGH SCORE: {self.high_score}", move=False, align=ALIGNMENT, font=FONT)
+        if self.high_score == 0:
+            self.write(arg=f"SCORE: {self.current_score}",
+                       move=False, align=ALIGNMENT, font=FONT)
+        else:
+            self.write(arg=f"SCORE: {self.current_score}    HIGH SCORE: {self.high_score}",
+                       move=False, align=ALIGNMENT, font=FONT)
 
     # shows game over message and check the high score
     def game_over(self):
@@ -33,19 +37,25 @@ class Scoreboard(Turtle):
         self.setposition(-200, 290)
         if self.current_score > self.high_score:
             self.update_high_score()
-            self.write(arg=f"NEW HIGH SCORE! {self.current_score}    GAME OVER", move=False, align=ALIGNMENT, font=FONT)
+            self.write(arg=f"NEW HIGH SCORE! {self.current_score}    GAME OVER",
+                       move=False, align=ALIGNMENT, font=FONT)
 
         else:
-            self.write(arg=f"SCORE: {self.current_score}    GAME OVER", move=False, align=ALIGNMENT, font=FONT)
+            self.write(arg=f"SCORE: {self.current_score}    GAME OVER",
+                       move=False, align=ALIGNMENT, font=FONT)
 
     # saves high score into file
     def update_high_score(self):
         with open('data.txt', 'w') as file:
             file.write(str(self.current_score))
+            self.high_score = self.current_score
 
     # resets if player wishes to continue to party with the noodle
     def reset(self):
+        if self.current_score > self.high_score:
+            self.update_high_score()
         self.current_score = 0
         self.update_score()
+
 
 
