@@ -1,5 +1,5 @@
 from turtle import Screen
-from snake import Snake
+from noodle import Noodle
 from food import Food
 from borders import Borders
 from scoreboard import Scoreboard
@@ -13,11 +13,11 @@ def danger_noodle_game():
     screen = Screen()
     screen.setup(width=620, height=630)
     screen.bgcolor('MistyRose')
-    screen.title('Snake')
+    screen.title('Danger Noodle')
     screen.tracer(0)
 
     # creating snake, food, score, and border objects
-    danger_noodle = Snake()
+    danger_noodle = Noodle()
     danger_snacks = Food()
     score = Scoreboard()
     borders = Borders()
@@ -59,8 +59,8 @@ def danger_noodle_game():
 
         # asking player if they want to play a new game (without restarting the program)
         if not game_on:
-            new_game = screen.textinput("GAME OVER", "New game? Y/N:")
-            if new_game.lower() == 'y':
+            new_game = screen.textinput("GAME OVER", "New game? Y/N:").lower()
+            if new_game == 'y':
                 game_on = True
                 danger_noodle.reset()
                 score.reset()
