@@ -12,7 +12,7 @@ RIGHT = 0
 
 
 # creating the snaky boi
-class Snake:
+class Noodle:
     def __init__(self):
         self.snaky_bits = []
         self.create_snake()
